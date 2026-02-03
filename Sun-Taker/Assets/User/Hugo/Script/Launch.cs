@@ -30,13 +30,13 @@ public class Launch : MonoBehaviour
         {
             jump = true;
             isDown = false;
-            Debug.Log("free jump");
+           // Debug.Log("free jump");
         }
         else if (collision.gameObject.tag == "Slow Enemy" && jumpDown == false && isUp == true)
         {
             jumpDown = true;
             isUp = false;
-            Debug.Log("lol ez");
+           // Debug.Log("lol ez");
         }
     }
 }

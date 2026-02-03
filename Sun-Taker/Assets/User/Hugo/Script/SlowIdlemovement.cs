@@ -18,6 +18,7 @@ public class SlowIdlemovement : MonoBehaviour
     public float downMaxWait;
     public float upMaxWait;
     public float force = 100;
+    private bool isGrounded;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +33,16 @@ public class SlowIdlemovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(isGrounded == false)
+        {
+            areas.area1.SetActive(false);
+        }
+        else if(isGrounded == true)
+        {
+            areas.area1.SetActive(true);
+        }
+
+
 
         if(areas.canMove == false)
         {
@@ -68,7 +79,6 @@ public class SlowIdlemovement : MonoBehaviour
             upWait -= Time.deltaTime;
             if (upWait >= 0f)
             {
-                //rb.linearVelocity = Vector2.up;
                 rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 
             }
@@ -78,11 +88,12 @@ public class SlowIdlemovement : MonoBehaviour
             downWait -= Time.deltaTime;
             if (downWait >= 0f)
             {
-                //rb.linearVelocity = Vector2.down;
                 rb.AddForce(Vector2.down * force,ForceMode2D.Impulse);
+
 
             }
         }
+
 
     }
 
@@ -91,5 +102,24 @@ public class SlowIdlemovement : MonoBehaviour
         Gizmos.DrawWireSphere(pointA.transform.position, 0.5f);
         Gizmos.DrawWireSphere(pointB.transform.position, 0.5f);
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+            Debug.Log("thouchedlol");
+        }
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+            Debug.Log("flyingig");
+        }
     }
 }
