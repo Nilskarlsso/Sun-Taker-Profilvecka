@@ -119,6 +119,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &17880065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 17880066}
+  m_Layer: 0
+  m_Name: Enemyjumpcolliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &17880066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17880065}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.72316, y: -0.28023, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1212847602}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &52155279
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b29e09f856e2394ca7b043aec23d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FastEnemyIdleMovement
+  launch: {fileID: 1212847600}
   areas: {fileID: 1638510274}
   pointA: {fileID: 1345868890}
   pointB: {fileID: 1989424307}
@@ -458,7 +491,7 @@ Transform:
   m_GameObject: {fileID: 485051860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0.04, z: 0}
+  m_LocalPosition: {x: -7.17, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -552,10 +585,13 @@ MonoBehaviour:
   areas: {fileID: 1022598833}
   pointA: {fileID: 1017062690}
   pointB: {fileID: 750193902}
-  rb: {fileID: 485051865}
   speed: 3
   launch: {fileID: 1212847600}
-  wait: 2
+  downWait: 0.3
+  upWait: 0.3
+  downMaxWait: 0.3
+  upMaxWait: 0.28
+  force: 3
 --- !u!1 &750193902
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +996,7 @@ GameObject:
   - component: {fileID: 1212847601}
   - component: {fileID: 1212847600}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,6 +1015,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Launch
   jump: 0
+  jumpDown: 0
+  isDown: 0
+  isUp: 0
 --- !u!61 &1212847601
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1013,7 +1052,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.9196359, y: -0.007369995}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1023,7 +1062,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.06335664, y: 0.98526}
   m_EdgeRadius: 0
 --- !u!4 &1212847602
 Transform:
@@ -1033,12 +1072,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212847599}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2, y: -0.12, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8731601, y: 0.20022999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 17880066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254562427
 GameObject:
@@ -1712,7 +1751,6 @@ GameObject:
   - component: {fileID: 1854743712}
   - component: {fileID: 1854743716}
   - component: {fileID: 1854743715}
-  - component: {fileID: 1854743717}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1880,19 +1918,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &1854743717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854743711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9840a3a3a5ef046a41b70a2841cf57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Launch
-  jump: 0
 --- !u!1 &1989424307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,4 +1960,4 @@ SceneRoots:
   - {fileID: 52155282}
   - {fileID: 485051863}
   - {fileID: 1381883460}
-  - {fileID: 1212847602}
+  - {fileID: 17880066}

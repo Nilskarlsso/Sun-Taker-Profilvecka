@@ -6,25 +6,31 @@ public class SlowIdlemovement : MonoBehaviour
     public Areas areas;
     public GameObject pointA;
     public GameObject pointB;
-    public Rigidbody2D rb;
+    Rigidbody2D rb;
 
     Transform currentPoint;
     public float speed;
 
     public Launch launch;
 
-    public float wait = 1f;
+    public float downWait;
+    public float upWait;
+    public float downMaxWait;
+    public float upMaxWait;
+    public float force = 100;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        upWait = upMaxWait;
+        downWait = downMaxWait;
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointB.transform;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if(areas.canMove == false)
@@ -42,24 +48,40 @@ public class SlowIdlemovement : MonoBehaviour
             if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
             {
                 currentPoint = pointA.transform;
+                launch.isUp = true;
+                launch.jump = false;
+                downWait = downMaxWait;
+                upWait = upMaxWait;
             }
             if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
             {
                 currentPoint = pointB.transform;
+                launch.isDown = true;
+                launch.jumpDown = false;
+                downWait = downMaxWait;
+                upWait = upMaxWait;
             }
         }
 
-        if(launch.jump == true)
+        if (launch.jump == true)
         {
-
-            wait -= Time.deltaTime;
-            if(wait >= 0f)
+            upWait -= Time.deltaTime;
+            if (upWait >= 0f)
             {
-                rb.linearVelocity = Vector2.up;
-                launch.jump = false;
+                //rb.linearVelocity = Vector2.up;
+                rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 
             }
-            
+        }
+        else if(launch.jumpDown == true)
+        {
+            downWait -= Time.deltaTime;
+            if (downWait >= 0f)
+            {
+                //rb.linearVelocity = Vector2.down;
+                rb.AddForce(Vector2.down * force,ForceMode2D.Impulse);
+
+            }
         }
 
     }

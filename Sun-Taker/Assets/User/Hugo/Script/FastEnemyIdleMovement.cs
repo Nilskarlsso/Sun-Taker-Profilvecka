@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class FastEnemyIdleMovement : MonoBehaviour
 {
+    public Launch launch;
     public Areas areas;
     public GameObject pointA;
     public GameObject pointB;
@@ -41,6 +43,7 @@ public class FastEnemyIdleMovement : MonoBehaviour
             if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
             {
                 currentPoint = pointB.transform;
+                launch.jump = false;
             }
         }
 
