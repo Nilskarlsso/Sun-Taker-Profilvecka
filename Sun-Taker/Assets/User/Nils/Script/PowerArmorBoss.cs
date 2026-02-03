@@ -13,6 +13,9 @@ public class PowerArmorBoss : MonoBehaviour
     public float idleDuration = 2f;
     private float stateTimer;
 
+    [Header("Basic Movment and Stuff")]
+    private bool facingRight;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -77,6 +80,10 @@ public class PowerArmorBoss : MonoBehaviour
         isAttacking = true;
         anim.SetBool("isAttacking", true);
         anim.SetTrigger("charge");
+        if (facingRight)
+        {
+
+        }
     }
 
     public void TriggerJumpSlam()
@@ -90,6 +97,15 @@ public class PowerArmorBoss : MonoBehaviour
     {
         isAttacking = false;
         anim.SetBool("isAttacking", false);
-        stateTimer = 0.5f; // sligt delay befor returning to idle
+        stateTimer = 0f; // sligt delay befor returning to idle
+    }
+
+    void Flip()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+
+        facingRight = !facingRight;
     }
 }
