@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using UnityEngine.InputSystem;
+
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
@@ -9,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isWallSliding;
     private float wallSlidingSpeed = 2f;
+    private float wallJumpLockCounter;
 
     private bool isWallJumping;
     private float wallJumpingDirection;
@@ -23,8 +26,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private float wallJumpLockTime = 0.15f;
 
-    
+
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -58,7 +62,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
         }
-        
+        else
+        {
+            // Optional: allow player to slightly influence direction while wall jumping
+            rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, rb.linearVelocity.y);
+        }
     }
 
     private bool IsGrounded()
@@ -75,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsWalled() && !IsGrounded() && horizontal != 0f)
         {
-            isWallSliding = false;
+            isWallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
@@ -86,36 +94,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallJump()
     {
+        // If we are sliding, allow wall jump
         if (isWallSliding)
         {
-            isWallJumping = true;
-            wallJumpingDirection = -transform.localScale.x;
-            wallJumpingCounter = wallJumpingTime;
-
-            CancelInvoke(nameof(StopWallJumping));
+            wallJumpingDirection = IsWalled() ? (transform.position.x < wallCheck.position.x ? -1 : 1) : 1;
+            wallJumpingCounter = wallJumpingTime; // reset jump window
         }
         else
         {
+            // Countdown the jump window
             wallJumpingCounter -= Time.deltaTime;
         }
 
-        if(Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
+        // Perform wall jump if player presses jump during the window
+        if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
             isWallJumping = true;
             rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
 
-            if(transform.localScale.x != wallJumpingDirection)
+            // Flip player if needed
+            if ((wallJumpingDirection > 0 && !isFacingRight) || (wallJumpingDirection < 0 && isFacingRight))
             {
-                isFacingRight = !isFacingRight;
-                Vector3 localScale = transform.localScale;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
+                Flip();
             }
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
         }
     }
+
 
     private void StopWallJumping()
     {
