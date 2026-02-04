@@ -64,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // Optional: allow player to slightly influence direction while wall jumping
             rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, rb.linearVelocity.y);
         }
     }
@@ -94,26 +93,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallJump()
     {
-        // If we are sliding, allow wall jump
+        
         if (isWallSliding)
         {
             wallJumpingDirection = IsWalled() ? (transform.position.x < wallCheck.position.x ? -1 : 1) : 1;
-            wallJumpingCounter = wallJumpingTime; // reset jump window
+            wallJumpingCounter = wallJumpingTime; 
         }
         else
         {
-            // Countdown the jump window
             wallJumpingCounter -= Time.deltaTime;
         }
 
-        // Perform wall jump if player presses jump during the window
+        
         if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
             isWallJumping = true;
             rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
 
-            // Flip player if needed
+            
             if ((wallJumpingDirection > 0 && !isFacingRight) || (wallJumpingDirection < 0 && isFacingRight))
             {
                 Flip();
