@@ -8,8 +8,6 @@ public class FastEnemymovement : MonoBehaviour
     public float fastMS;
     public Rigidbody2D rb;
 
-    private float distance;
-    public float aggroDistance;
     void Start()
     {
 

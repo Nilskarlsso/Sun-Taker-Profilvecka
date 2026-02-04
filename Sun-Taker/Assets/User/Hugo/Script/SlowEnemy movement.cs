@@ -10,8 +10,6 @@ public class SlowEnemymovement : MonoBehaviour
     public float slowMS;
     public Rigidbody2D rb;
 
-    private float distance;
-    public float aggroDistance;
     void Start()
     {
 
