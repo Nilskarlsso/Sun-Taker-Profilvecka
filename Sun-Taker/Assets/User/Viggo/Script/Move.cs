@@ -37,20 +37,25 @@ public class Move : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
 
+    Animator animator;
+
 
     [SerializeField] private TrailRenderer tr;
 
     //she strogin me off til i beef?
 
-    
+    private bool isGrounded;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         weaponHitBox.enabled = false;
     }
 
     private void Update()
     {
+        isGrounded = IsGrounded();
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             weaponHitBox.enabled = true;
@@ -80,15 +85,20 @@ public class Move : MonoBehaviour
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
 
                 doubleJump = !doubleJump;
+
+                animator.SetBool("isJumping", isGrounded);
             }
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+
+
         }
 
         Wallslide();
+
         WallJump();
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -100,7 +110,6 @@ public class Move : MonoBehaviour
         {
             Flip();
         }
-        
     }
 
     private bool IsWalled()
@@ -169,6 +178,8 @@ public class Move : MonoBehaviour
         if (!isWallJumping)
         {
             rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+            animator.SetFloat("xVelocity", math.abs(rb.linearVelocity.x));
+            animator.SetFloat("yVelocity",(rb.linearVelocity.y));
         }
 
 
@@ -177,6 +188,8 @@ public class Move : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
+        animator.SetBool("isJumping", isGrounded);
     }
 
     private void Flip()
