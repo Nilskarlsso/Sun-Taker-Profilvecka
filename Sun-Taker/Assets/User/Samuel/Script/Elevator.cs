@@ -7,7 +7,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] private ScreenFader screenFader;
 
     [Header("Lock Settings")]
-    [SerializeField] private bool isLocked = true;
+    [SerializeField] private bool isLocked = false;
 
     private bool playerDetected;
     private GameObject playerGo;
