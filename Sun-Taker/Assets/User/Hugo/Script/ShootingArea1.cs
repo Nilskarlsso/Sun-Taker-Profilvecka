@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.WSA;
 
-public class ShootingArea : MonoBehaviour
+public class ShootingArea1 : MonoBehaviour
 {
     public bool canMove;
     public GameObject area1;
@@ -11,6 +10,16 @@ public class ShootingArea : MonoBehaviour
     {
         canMove = false;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canMove = true;
+            shootingEnemyMovement.startShooting = true;
+            Debug.Log("fuck yeah");
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")

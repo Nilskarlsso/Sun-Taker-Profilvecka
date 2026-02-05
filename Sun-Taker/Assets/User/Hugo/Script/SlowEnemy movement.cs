@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SlowEnemymovement : MonoBehaviour
 {
-    public Areas areas;
+    public JumpArea areas;
     public GameObject player;
     Transform Player;
     public float slowMS;
     public Rigidbody2D rb;
-
+    
     public EnemyAttack enemyAttack;
 
     void Start()

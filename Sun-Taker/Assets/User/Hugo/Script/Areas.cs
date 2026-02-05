@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class Areas : MonoBehaviour
+public class JumpArea : MonoBehaviour
 {
     public bool canMove;
     public GameObject jumpcolliders;
     public GameObject area1;
-    public GameObject area2;
-    public GameObject area3;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,7 +36,6 @@ public class Areas : MonoBehaviour
         {
             canMove = false;
             jumpcolliders.SetActive(true);
-
         }
 
         //Debug.Log("cool ig");

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SlowIdlemovement : MonoBehaviour
 {
-    public Areas areas;
+    public JumpArea areas;
     public GameObject pointA;
     public GameObject pointB;
     Rigidbody2D rb;
@@ -109,7 +109,6 @@ public class SlowIdlemovement : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            Debug.Log("thouchedlol");
         }
 
     }
@@ -119,7 +118,6 @@ public class SlowIdlemovement : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
-            Debug.Log("flyingig");
         }
     }
 }
