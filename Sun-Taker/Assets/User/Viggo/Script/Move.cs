@@ -9,7 +9,7 @@ public class Move : MonoBehaviour
 {
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float jumpingPower = 12f;
     private bool isFacingRight = true;
 
     private bool isWallSliding;
@@ -20,11 +20,11 @@ public class Move : MonoBehaviour
     private float wallJumpingTime = 0.2f;
     private float wallJumpingCounter;
     private float wallJumpingDuration = 0.4f;
-    private Vector2 wallJumpingPower = new Vector2(8f,16f);
+    private Vector2 wallJumpingPower = new Vector2(4f,12f);
 
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 12f;
+    private float dashingPower = 6f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
@@ -112,18 +112,25 @@ public class Move : MonoBehaviour
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f , wallLayer);
     }
+
     private void Wallslide()
     {
-        if(IsWalled() && !IsGrounded() && horizontal != 0f)
+        if (IsWalled() && !IsGrounded() && horizontal != 0f)
         {
             isWallSliding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlidingSpeed, float.MaxValue)); 
+            doubleJump = false;
+
+            rb.linearVelocity = new Vector2(
+                rb.linearVelocity.x,
+                Mathf.Clamp(rb.linearVelocity.y, -wallSlidingSpeed, float.MaxValue)
+            );
         }
         else
         {
             isWallSliding = false;
         }
     }
+
 
     private IEnumerator StandingAttacking()
     {
@@ -152,10 +159,17 @@ public class Move : MonoBehaviour
         if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
             isWallJumping = true;
-            rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+
+            doubleJump = false;
+
+            rb.linearVelocity = new Vector2(
+                wallJumpingDirection * wallJumpingPower.x,
+                wallJumpingPower.y
+            );
+
             wallJumpingCounter = 0f;
 
-            if(transform.localScale.x != wallJumpingDirection)
+            if (transform.localScale.x != wallJumpingDirection)
             {
                 isFacingRight = !isFacingRight;
                 Vector3 localScale = transform.localScale;
@@ -165,6 +179,7 @@ public class Move : MonoBehaviour
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
         }
+
     }
 
     private void StopWallJumping()
