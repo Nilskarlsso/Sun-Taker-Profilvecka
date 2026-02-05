@@ -15,10 +15,13 @@ public class PowerArmorBoss : MonoBehaviour
 
     [Header("Basic Movment and Stuff")]
     private bool facingRight;
+    private GameObject bossRb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        bossRb = GetComponent<GameObject>();
+
         stateTimer = idleDuration;
 
         if (anim == null)
@@ -45,6 +48,7 @@ public class PowerArmorBoss : MonoBehaviour
                     ChooseAttack();
                     break;
                 case BossState.Charge:
+
                 case BossState.Jump:
                     EnterStateIdle();
                     break;

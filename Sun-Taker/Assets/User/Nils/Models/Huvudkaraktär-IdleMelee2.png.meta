@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1689a0b33439a1740abfe8994bd93d67
+guid: d606faca74b77774897a2f30c3e8d29a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8616025755022534324
-    second: 1-a bossen-sprits-v2-closeline-2_0
+      213: 3945763124890270613
+    second: "Huvudkarakt\xE4r-IdleMelee2_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1-a bossen-sprits-v2-closeline-2_0
+      name: "Huvudkarakt\xE4r-IdleMelee2_0"
       rect:
         serializedVersion: 2
-        x: 17
-        y: 29
-        width: 95
-        height: 82
+        x: 16
+        y: 0
+        width: 35
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b62cb746c5429770800000000000000
-      internalID: 8616025755022534324
+      spriteID: 59b7be218aa22c630800000000000000
+      internalID: 3945763124890270613
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1-a bossen-sprits-v2-closeline-2_0: 8616025755022534324
+      "Huvudkarakt\xE4r-IdleMelee2_0": 3945763124890270613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

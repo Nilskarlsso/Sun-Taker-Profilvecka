@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c263f4d5c94364f4fa777fe3fe2b72fc
+guid: 201afdf0ddf7a0b4caffa9dd32a45cbb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1856750439639073814
-    second: 1-a bossen-sprits-v2-closeline-3_0
+      213: -5076984229380454453
+    second: 1-a bossen-sprits-v4-closeline-2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1-a bossen-sprits-v2-closeline-3_0
+      name: 1-a bossen-sprits-v4-closeline-2_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 15
-        width: 95
-        height: 82
+        x: 17
+        y: 0
+        width: 83
+        height: 81
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 614cc37ffa084c910800000000000000
-      internalID: 1856750439639073814
+      spriteID: bc7848d0ebdea89b0800000000000000
+      internalID: -5076984229380454453
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1-a bossen-sprits-v2-closeline-3_0: 1856750439639073814
+      1-a bossen-sprits-v4-closeline-2_0: -5076984229380454453
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
