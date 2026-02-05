@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +24,7 @@ public class Move : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 24f;
+    private float dashingPower = 12f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
@@ -39,12 +40,9 @@ public class Move : MonoBehaviour
 
     Animator animator;
 
-
     [SerializeField] private TrailRenderer tr;
 
     //she strogin me off til i beef?
-
-    private bool isGrounded;
 
     private void Start()
     {
@@ -54,21 +52,21 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = IsGrounded();
+        if (IsGrounded() == true && doubleJump == false)
+        {
+            animator.SetBool("isJumping", false);
+        }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            weaponHitBox.enabled = true;
+            StartCoroutine(StandingAttacking());
         }
-
-        if (Input.GetKeyUp(KeyCode.L))
-        {
-            weaponHitBox.enabled = false;
-        }
-
+ 
         if (isDashing)
         {
+
             return;
+
         }
 
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -86,15 +84,13 @@ public class Move : MonoBehaviour
 
                 doubleJump = !doubleJump;
 
-                animator.SetBool("isJumping", isGrounded);
+                animator.SetBool("isJumping", IsGrounded());
             }
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
-
-
         }
 
         Wallslide();
@@ -129,6 +125,15 @@ public class Move : MonoBehaviour
         }
     }
 
+    private IEnumerator StandingAttacking()
+    {
+        weaponHitBox.enabled = true;
+        animator.SetTrigger("isAttacking");
+        yield return new WaitForSeconds(dashingTime);
+        weaponHitBox.enabled = false;
+        animator.ResetTrigger("isAttacking");
+        
+    }
     private void WallJump()
     {
         if (isWallSliding)
@@ -169,7 +174,6 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (isDashing)
         {
             return;
@@ -181,15 +185,11 @@ public class Move : MonoBehaviour
             animator.SetFloat("xVelocity", math.abs(rb.linearVelocity.x));
             animator.SetFloat("yVelocity",(rb.linearVelocity.y));
         }
-
-
     }
 
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-
-        animator.SetBool("isJumping", isGrounded);
     }
 
     private void Flip()
@@ -207,6 +207,8 @@ public class Move : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        animator.SetTrigger("isDashing");
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
@@ -215,6 +217,7 @@ public class Move : MonoBehaviour
 
         rb.gravityScale = originalGravity;
         isDashing = false;
+        animator.ResetTrigger("isDashing");
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
