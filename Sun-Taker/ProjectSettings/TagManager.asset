@@ -5,11 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Boss
+  - Ground
+  - Slow Enemy
+  - Enemy
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - ground
