@@ -12,6 +12,10 @@ public class Elevator : MonoBehaviour
     private bool playerDetected;
     private GameObject playerGo;
 
+    [SerializeField] private int buttonsRequired = 2;
+    private int buttonsPressed = 0;
+
+
     void Update()
     {
         if (isLocked)
@@ -46,6 +50,15 @@ public class Elevator : MonoBehaviour
         {
             playerDetected = false;
             playerGo = null;
+        }
+    }
+    public void ButtonPressed()
+    {
+        buttonsPressed++;
+
+        if (buttonsPressed >= buttonsRequired)
+        {
+            Unlock();
         }
     }
 }
