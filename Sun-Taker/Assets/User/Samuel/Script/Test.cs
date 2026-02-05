@@ -2,11 +2,25 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    public int health;
 
+    public int maxHealth = 10;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if(collision.tag == "PlayerAttack")
+        health = maxHealth;
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if(health <= 0)
         {
             Destroy(gameObject);
         }
