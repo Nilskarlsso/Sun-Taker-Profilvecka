@@ -3,7 +3,6 @@ using UnityEngine;
 public class UnlockButton : MonoBehaviour
 {
     [SerializeField] private Elevator elevator;
-    [SerializeField] private bool oneTimeUse = true;
 
     private bool playerInRange;
     private bool used;
@@ -12,10 +11,8 @@ public class UnlockButton : MonoBehaviour
     {
         if (playerInRange && !used && Input.GetKeyDown(KeyCode.E))
         {
-            elevator.Unlock();
-
-            if (oneTimeUse)
-                used = true;
+            elevator.ButtonPressed();
+            used = true;
         }
     }
 
