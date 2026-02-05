@@ -10,15 +10,16 @@ public class SlowEnemymovement : MonoBehaviour
     public float slowMS;
     public Rigidbody2D rb;
 
+    public EnemyAttack enemyAttack;
+
     void Start()
     {
-
+        GetComponentInChildren<EnemyAttack>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (areas.canMove == true)
         {
             float targetX = player.transform.position.x;
@@ -28,5 +29,7 @@ public class SlowEnemymovement : MonoBehaviour
 
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, slowMS * Time.deltaTime);
         }
+        
+
     }
 }
