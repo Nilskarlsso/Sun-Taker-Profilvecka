@@ -38,10 +38,13 @@ public class Move : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
 
-    Animator animator;
+     Animator animator;
 
-    [SerializeField] private TrailRenderer tr;
+    [SerializeField] private Transform ShootPoint;
+    [SerializeField] private GameObject bullet;
 
+
+    [SerializeField] private Vector2 bulletDirection;
     //she strogin me off til i beef?
 
     private void Start()
@@ -52,21 +55,27 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
+
+        bulletDirection.x = transform.localScale.x;
+
         if (IsGrounded() == true && doubleJump == false)
         {
             animator.SetBool("isJumping", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(StandingAttacking());
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            StartCoroutine(Shoot());
         }
  
         if (isDashing)
         {
-
             return;
-
         }
 
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -220,5 +229,14 @@ public class Move : MonoBehaviour
         animator.ResetTrigger("isDashing");
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    private IEnumerator Shoot()
+    {
+        animator.SetTrigger("isShooting");
+        yield return new WaitForSeconds(dashingTime);
+        Instantiate(bullet, ShootPoint.position, ShootPoint.rotation).GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * dashingPower;
+        
+        animator.ResetTrigger("isShooting");
     }
 }
