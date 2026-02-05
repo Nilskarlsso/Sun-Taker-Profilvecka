@@ -39,3 +39,4 @@ public class ScreenFader : MonoBehaviour
         SetAlpha(endAlpha);
     }
 }
+
