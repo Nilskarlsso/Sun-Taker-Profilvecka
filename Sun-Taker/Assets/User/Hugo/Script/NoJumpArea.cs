@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.WSA;
 
-public class ShootingArea : MonoBehaviour
+public class NoJumpArea : MonoBehaviour
 {
     public bool canMove;
     public GameObject area1;
-    public ShooringEnemymovevent shootingEnemyMovement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,7 +14,6 @@ public class ShootingArea : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             canMove = false;
-            shootingEnemyMovement.startShooting = false;
         }
     }
 
