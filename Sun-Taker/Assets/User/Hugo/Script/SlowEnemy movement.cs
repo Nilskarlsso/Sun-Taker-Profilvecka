@@ -15,6 +15,7 @@ public class SlowEnemymovement : MonoBehaviour
     void Start()
     {
         GetComponentInChildren<EnemyAttack>();
+        
     }
 
     // Update is called once per frame
