@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4764224220093919159}
   - component: {fileID: 2499133550342293580}
   - component: {fileID: -6160902314834752536}
-  - component: {fileID: 3405585518772784813}
   - component: {fileID: -2076806363006201881}
+  - component: {fileID: 3405585518772784813}
   m_Layer: 0
   m_Name: rtwer
   m_TagString: Untagged
@@ -136,6 +136,24 @@ MonoBehaviour:
   rb: {fileID: 0}
   player: {fileID: 0}
   force: 5
+--- !u!114 &-2076806363006201881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209169534331366256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b392eead22aa6044a7debf6e82445df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  attackDamage: 20
+  attackOffset: {x: 0, y: 0, z: 0}
+  attackRange: 1
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!58 &3405585518772784813
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -172,21 +190,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.0040544653}
   m_Radius: 0.67082554
---- !u!114 &-2076806363006201881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9209169534331366256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b392eead22aa6044a7debf6e82445df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
-  attackDamage: 20
-  attackOffset: {x: 0, y: 0, z: 0}
-  attackRange: 1
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 9

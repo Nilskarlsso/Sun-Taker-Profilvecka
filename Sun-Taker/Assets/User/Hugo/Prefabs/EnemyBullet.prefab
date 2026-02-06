@@ -123,10 +123,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
   attackDamage: 20
   attackOffset: {x: 0, y: 0, z: 0}
-  attackRange: 0.2
+  attackRange: 0.36
   attackMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8
 --- !u!58 &6458323039659571315
 CircleCollider2D:
   m_ObjectHideFlags: 0
