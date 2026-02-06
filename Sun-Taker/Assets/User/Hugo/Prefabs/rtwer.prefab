@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b392eead22aa6044a7debf6e82445df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
-  attackDamage: 20
+  attackDamage: 100
   attackOffset: {x: 0, y: 0, z: 0}
   attackRange: 1
   attackMask:
