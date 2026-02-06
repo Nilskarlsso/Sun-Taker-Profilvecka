@@ -55,7 +55,6 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-
         bulletDirection.x = transform.localScale.x;
 
         if (IsGrounded() == true && doubleJump == false)
@@ -164,6 +163,8 @@ public class Move : MonoBehaviour
             rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
 
+            doubleJump = true;
+
             if(transform.localScale.x != wallJumpingDirection)
             {
                 isFacingRight = !isFacingRight;
@@ -236,7 +237,6 @@ public class Move : MonoBehaviour
         animator.SetTrigger("isShooting");
         yield return new WaitForSeconds(dashingTime);
         Instantiate(bullet, ShootPoint.position, ShootPoint.rotation).GetComponent<Rigidbody2D>().linearVelocity = bulletDirection * dashingPower;
-        
         animator.ResetTrigger("isShooting");
     }
 }
