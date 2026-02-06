@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Timeline;
 
 public class BulletDamage : MonoBehaviour
 {
+    public int attackDamage = 20;
+    public LayerMask attackMask;
+
     PlayerHealth Phealth;
     public int damage = 10;
 
@@ -22,7 +26,22 @@ public class BulletDamage : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            
+            Attack();
+        }
+
+
+    }
+
+    public void Attack()
+    {
+        Vector3 pos = transform.position;
+        pos += transform.right;
+        pos += transform.up;
+
+        Collider2D colInfo = Physics2D.OverlapCircle(pos, attackMask);
+        if (colInfo != null)
+        {
+            colInfo.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
         }
     }
 
