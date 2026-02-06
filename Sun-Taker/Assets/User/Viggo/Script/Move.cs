@@ -9,7 +9,7 @@ public class Move : MonoBehaviour
 {
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float jumpingPower = 12f;
     private bool isFacingRight = true;
 
     private bool isWallSliding;
@@ -20,11 +20,11 @@ public class Move : MonoBehaviour
     private float wallJumpingTime = 0.2f;
     private float wallJumpingCounter;
     private float wallJumpingDuration = 0.4f;
-    private Vector2 wallJumpingPower = new Vector2(8f,16f);
+    private Vector2 wallJumpingPower = new Vector2(4f,12f);
 
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 12f;
+    private float dashingPower = 6f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
